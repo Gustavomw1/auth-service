@@ -3,6 +3,9 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+# Ignorar o application.properties
+/src/main/resources/application.properties
+
 
 # Spring Tool Suite
 .apt_generated
