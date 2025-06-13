@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = "pedidos")
 
-public class Order {
+public class Pedidos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
