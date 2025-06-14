@@ -1,6 +1,7 @@
 package com.ecommerce.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import com.ecommerce.demo.service.PedidosService;
 
 @RestController
 @RequestMapping("/api/pedidos")
+@PreAuthorize("isAuthenticated()")
+
 public class PedidosController {
 
     @Autowired

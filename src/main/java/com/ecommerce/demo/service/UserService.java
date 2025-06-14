@@ -23,4 +23,8 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean existsByUsername(String username) {
+        throw new UnsupportedOperationException("Unimplemented method 'existsByUsername'");
+    }
 }

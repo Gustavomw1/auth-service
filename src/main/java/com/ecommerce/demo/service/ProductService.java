@@ -20,7 +20,7 @@ public class ProductService {
 
     public Product save(Product product) {
         return productRepository.save(product);
-    }
+    };
 
     public void reduceStock(Long productId, int quantity) {
         Product p = productRepository.findById(productId).orElse(null);
