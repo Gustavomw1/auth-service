@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Entrar - </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../img/java-coffee-cup-logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="login-container">
+        <header>
+            <img src="../img/java-coffee-cup-logo.png" alt="Nike Logo" class="logo">
+        </header>
+
+        <main>
+            <h1>Entrar</h1>
+            <form onsubmit="event.preventDefault(); login();">
+                <input type="text" id="login-username" placeholder="Usuário" required>
+                <input type="password" id="login-password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <p class="register-link">
+                Não tem conta? <a href="../register/register.html">Cadastre-se</a>
+            </p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

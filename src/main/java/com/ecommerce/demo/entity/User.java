@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data //getter e setters
+@NoArgsConstructor // constructor sem argumentos
+@AllArgsConstructor // constructor com argumentos
 public class User {
 
     @Id
@@ -17,5 +17,8 @@ public class User {
     private String username;
 
     private String password;
+
     private String user;
+
+    private String role;
 }

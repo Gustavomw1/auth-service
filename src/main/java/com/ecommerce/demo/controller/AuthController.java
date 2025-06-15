@@ -12,7 +12,7 @@ import com.ecommerce.demo.service.UserService;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
+    @Autowired // Injeta automaticamente um objeto da classe ProdutoRepository
     private UserService userService;
 
     @PostMapping("/register")
@@ -21,8 +21,7 @@ public class AuthController {
             User createdUser = userService.register(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Erro ao registrar: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -30,14 +29,9 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
             User loggedUser = userService.login(user.getUsername(), user.getPassword());
-            if (loggedUser == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Usuário ou senha inválidos");
-            }
             return ResponseEntity.ok(loggedUser);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao realizar login: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 }

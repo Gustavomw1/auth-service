@@ -9,9 +9,11 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@RestControllerAdvice
+@RestControllerAdvice // Trata a exceção RequisicaoInvalida
 public class GlobalExceptionHandler {
 
+    // Trata exceção personalizada quando a requisição é inválida (ex: campos
+    // obrigatórios ausentes)
     @ExceptionHandler(RequisicaoInvalida.class)
     public ResponseEntity<Object> handleBadRequest(RequisicaoInvalida ex) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -22,6 +24,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    // Trata exceção quando o usuário envia credenciais erradas (ex: login/senha
+    // inválidos)
     @ExceptionHandler(CredenciaisInvalidas.class)
     public ResponseEntity<Object> handleUnauthorized(CredenciaisInvalidas ex) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -31,5 +35,4 @@ public class GlobalExceptionHandler {
         body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
-
 }
