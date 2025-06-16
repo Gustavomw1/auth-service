@@ -18,22 +18,23 @@ async function login() {
             userId = data.id;
             token = data.token;
 
-            // Salvar no localStorage
             localStorage.setItem('userId', userId);
             localStorage.setItem('token', token);
 
-            alert('Logado como ' + data.username);
-
-            // Redirecionar conforme role
-            if (data.role === 'ADMIN') {
-                window.location.href = '../adm/adm.html';
-            } else {
-                window.location.href = '../cliente/cliente.html';
-            }
+            showToast('Logado como ' + data.username);
         } else {
-            alert('Erro: ' + data.message || JSON.stringify(data));
+            showToast('Erro: ' + (data.message || JSON.stringify(data)));
         }
     } catch (error) {
-        alert('Erro ao fazer login: ' + error.message);
+        showToast('Erro ao fazer login: ' + error.message);
     }
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
 }
