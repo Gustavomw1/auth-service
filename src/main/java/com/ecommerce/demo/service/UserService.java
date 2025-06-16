@@ -1,6 +1,7 @@
 package com.ecommerce.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.demo.entity.User;
@@ -11,8 +12,14 @@ import com.ecommerce.demo.repository.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired // Injeta automaticamente um objeto da classe ProdutoRepository
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired // injetar automaticamente uma dependência em uma classe
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User register(User user) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
@@ -23,12 +30,14 @@ public class UserService {
             user.setRole("USER");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             throw new CredenciaisInvalidas("Usuário ou senha inválidos.");
         }
         return user;
